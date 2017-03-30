@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aeon Clock</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            pointer-events: none;
+        }
+
+        body {
+            background-color: #039be5;
+        }
+
+        #clock {
+            width: 512px;
+            height: 512px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #hour {
+            width: 512px;
+            height: 512px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        #hour img {
+            width: 512px;
+            height: 512px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        #hour img#hour_second {
+            z-index: 2;
+        }
+
+        #minute {
+            width: 256px;
+            height: 256px;
+            position: absolute;
+            top: 128px;
+            left: 128px;
+            right: 128px;
+            bottom: 128px;
+            z-index: 2;
+            background-color: #01579b;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #01579b;
+        }
+
+        #minute img {
+            width: 256px;
+            height: 256px;
+            position: absolute;
+            top: 0;
+            /*left: -5px;*/
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        #minute img#minute_second {
+            z-index: 2;
+            /*left: 5px;*/
+        }
+    </style>
+</head>
+<body>
+<div id="clock">
+    <div id="hour">
+        <img id="hour_first" src="img/empty.svg"/>
+        <img id="hour_second" src="img/empty.svg"/>
+    </div>
+    <div id="minute">
+        <img id="minute_first" src="img/empty.svg"/>
+        <img id="minute_second" src="img/empty.svg"/>
+    </div>
+</div>
+<script>
+    var hour1Img = document.getElementById('hour_first'),
+        hour2Img = document.getElementById('hour_second'),
+        minute1Img = document.getElementById('minute_first'),
+        minute2Img = document.getElementById('minute_second');
+    setInterval(function () {
+        var date = new Date(),
+            hour = date.getHours() + '',
+            minute = date.getMinutes() + '';
+        if (hour < 10) {
+            hour1Img.src = 'img/h/h_0.svg';
+            hour2Img.src = 'img/h/m_' + hour + '.svg';
+        } else {
+            var hour1 = hour.split('')[0],
+                hour2 = hour.split('')[1];
+            hour1Img.src = 'img/h/h_' + hour1 + '.svg';
+            hour2Img.src = 'img/h/m_' + hour2 + '.svg';
+        }
+        if (minute < 10) {
+            minute1Img.src = 'img/m/h_0.svg';
+            minute2Img.src = 'img/m/m_' + hour + '.svg';
+        } else {
+            var minute1 = minute.split('')[0],
+                minute2 = minute.split('')[1];
+            minute1Img.src = 'img/m/h_' + minute1 + '.svg';
+            minute2Img.src = 'img/m/m_' + minute2 + '.svg';
+        }
+    }, 1000);
+</script>
+</body>
+</html>
